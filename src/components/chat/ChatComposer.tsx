@@ -31,7 +31,7 @@ export function ChatComposer({ onSend, disabled = false }: ChatComposerProps) {
         />
         <button className="send-button" type="button" title="Gửi câu hỏi" disabled={!message.trim() || disabled} onClick={submitMessage}><ArrowUp size={20} /></button>
       </div>
-      <p>Phản hồi được cung cấp bởi trợ lý MUCE. Hãy kiểm tra lại các thông tin tuyển sinh quan trọng.</p>
+      <p className="composer-note">Phản hồi được cung cấp bởi trợ lý MUCE. Hãy kiểm tra lại các thông tin tuyển sinh quan trọng.</p>
     </div>
   )
 }

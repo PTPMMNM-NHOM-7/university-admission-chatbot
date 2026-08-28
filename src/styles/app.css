@@ -109,6 +109,7 @@
 .account-box > div:nth-child(2) { display: grid; min-width: 0; margin-right: auto; }
 .account-box strong, .account-box span { font-size: 12px; }
 .account-box span { margin-top: 1px; color: var(--muted); }
+.app-version { display: block; margin: 7px 7px 0; color: #929d98; font-size: 9px; text-align: right; }
 
 .main-panel { display: grid; grid-template-rows: 70px minmax(0, 1fr); min-width: 0; height: 100svh; }
 .topbar {
@@ -226,7 +227,7 @@
 .send-button { display: grid; width: 40px; height: 40px; padding: 0; place-items: center; border: 0; border-radius: 7px; color: white; background: var(--green-700); cursor: pointer; }
 .send-button:hover:not(:disabled) { background: var(--green-900); }
 .send-button:disabled { color: #a8b2ad; background: #edf1ef; }
-.composer-wrap > p { margin: 6px 0 0; color: #8a9690; font-size: 9px; text-align: center; }
+.composer-note { margin: 6px 0 0; color: #8a9690; font-size: 9px; text-align: center; }
 
 .conversation { padding: 42px 0 36px; }
 .conversation-intro { padding-bottom: 22px; border-bottom: 1px solid var(--line); }
@@ -365,7 +366,7 @@
   .suggested-row > span { width: 100%; }
   .suggested-row button { max-width: 100%; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
   .composer-wrap { padding: 10px 12px 8px; }
-  .composer-wrap > p { display: none; }
+  .composer-note { display: none; }
   .conversation { padding-top: 28px; }
   .conversation-intro h1 { font-size: 20px; }
   .message { max-width: 95%; }
