@@ -40,3 +40,22 @@ npm run build
 npm run lint
 npm run preview
 ```
+
+## Kết nối trợ lý MUCE
+
+Frontend sử dụng ba endpoint của trợ lý MUCE:
+
+- `GET /TroLyAo/Intro`: khởi tạo visitor và kiểm tra hồ sơ.
+- `POST /TroLyAo/Register`: đăng ký vai trò, họ tên và thông tin liên hệ.
+- `POST /TroLyAo/Ask`: gửi câu hỏi và nhận phản hồi.
+
+Trong môi trường development, Vite chuyển tiếp `/api/muce/*` tới
+`https://muce.edu.vn/TroLyAo/*`. API MUCE không trả header CORS cho origin khác,
+vì vậy môi trường production cũng cần cấu hình reverse proxy cùng đường dẫn.
+Không nên gọi trực tiếp `https://muce.edu.vn/TroLyAo` từ browser.
+
+Biến môi trường mặc định được mô tả trong `.env.example`:
+
+```env
+VITE_MUCE_API_BASE_URL=/api/muce
+```
