@@ -1,10 +1,10 @@
-import { GraduationCap } from 'lucide-react'
+import { MessageCircleQuestion } from 'lucide-react'
 
 export function Brand() {
   return (
-    <div className="brand" aria-label="UniGuide">
-      <span className="brand-mark"><GraduationCap size={22} strokeWidth={2.2} /></span>
-      <span><strong>UniGuide</strong><small>Tuyển sinh thông minh</small></span>
+    <div className="brand" aria-label="MUCE Guide">
+      <span className="brand-mark"><MessageCircleQuestion size={22} strokeWidth={2.2} /></span>
+      <span><strong>MUCE Guide</strong><small>Trợ lý tuyển sinh</small></span>
     </div>
   )
 }
