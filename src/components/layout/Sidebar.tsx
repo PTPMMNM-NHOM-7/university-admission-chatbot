@@ -33,6 +33,7 @@ export function Sidebar({ isOpen, onClose, onNewConversation }: SidebarProps) {
             <div><strong>Khách</strong><span>Chưa đăng nhập</span></div>
             <button className="icon-button" type="button" title="Đăng nhập"><LogIn size={18} /></button>
           </div>
+          <span className="app-version">v1.0.0</span>
         </div>
       </aside>
     </>
