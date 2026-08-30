@@ -1,5 +1,4 @@
 import { useEffect, useRef, useState } from 'react'
-import { AuthModal } from './components/auth/AuthModal'
 import { ChatComposer } from './components/chat/ChatComposer'
 import { Conversation } from './components/chat/Conversation'
 import { ProfileGate } from './components/chat/ProfileGate'
@@ -24,7 +23,6 @@ function App() {
   const [profileStatus, setProfileStatus] = useState<ProfileStatus>('loading')
   const [profileIntro, setProfileIntro] = useState('')
   const [profileError, setProfileError] = useState('')
-  const [isAuthOpen, setIsAuthOpen] = useState(false)
   const conversationVersion = useRef(0)
 
   useEffect(() => {
@@ -131,24 +129,16 @@ function App() {
   }
 
   return (
-    <>
-      <div className="app-shell">
-        <Sidebar isOpen={isSidebarOpen} onClose={() => setIsSidebarOpen(false)} onNewConversation={startNewConversation} />
-        <main className="main-panel">
-          <Header onOpenMenu={() => setIsSidebarOpen(true)} onLogin={() => setIsAuthOpen(true)} />
-          <div className="chat-workspace">
-            <div className="chat-scroll-region" aria-live="polite">{renderWorkspace()}</div>
-            {profileStatus === 'ready' && <ChatComposer onSend={sendMessage} disabled={isReplying} />}
-          </div>
-        </main>
-      </div>
-
-      <AuthModal
-        isOpen={isAuthOpen}
-        onClose={() => setIsAuthOpen(false)}
-        onSubmit={() => setIsAuthOpen(false)}
-      />
-    </>
+    <div className="app-shell">
+      <Sidebar isOpen={isSidebarOpen} onClose={() => setIsSidebarOpen(false)} onNewConversation={startNewConversation} />
+      <main className="main-panel">
+        <Header onOpenMenu={() => setIsSidebarOpen(true)} />
+        <div className="chat-workspace">
+          <div className="chat-scroll-region" aria-live="polite">{renderWorkspace()}</div>
+          {profileStatus === 'ready' && <ChatComposer onSend={sendMessage} disabled={isReplying} />}
+        </div>
+      </main>
+    </div>
   )
 }
 
