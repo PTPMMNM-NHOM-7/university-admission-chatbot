@@ -1,7 +1,7 @@
 import { useMemo, useState } from 'react'
-import { ArrowLeft, ChevronDown, CircleHelp, KeyRound, LifeBuoy, Search, ShieldCheck, UserRound } from 'lucide-react'
+import { ArrowLeft, ChevronDown, CircleHelp, KeyRound, LifeBuoy, MessageSquareText, Search, Send, ShieldCheck, UserRound } from 'lucide-react'
 
-type HelpCategory = 'Tất cả' | 'Bắt đầu' | 'Tài khoản & đăng nhập' | 'Tuyển sinh' | 'Trợ lý MUCE'
+type HelpCategory = 'Tất cả' | 'Bắt đầu' | 'Tài khoản & đăng nhập' | 'Sử dụng chatbot' | 'Phiên trò chuyện' | 'Dữ liệu & MUCE' | 'Tuyển sinh'
 
 interface HelpArticle {
   id: number
@@ -10,7 +10,7 @@ interface HelpArticle {
   answer: string
 }
 
-const categories: HelpCategory[] = ['Tất cả', 'Bắt đầu', 'Tài khoản & đăng nhập', 'Tuyển sinh', 'Trợ lý MUCE']
+const categories: HelpCategory[] = ['Tất cả', 'Bắt đầu', 'Tài khoản & đăng nhập', 'Sử dụng chatbot', 'Phiên trò chuyện', 'Dữ liệu & MUCE', 'Tuyển sinh']
 
 const articles: HelpArticle[] = [
   {
@@ -18,6 +18,36 @@ const articles: HelpArticle[] = [
     category: 'Bắt đầu',
     question: 'Làm thế nào để bắt đầu hỏi về tuyển sinh?',
     answer: 'Chọn Cuộc trò chuyện mới ở thanh bên, sau đó nhập câu hỏi vào ô chat. Mai Anh sẽ hướng dẫn bạn theo từng bước dựa trên thông tin bạn cung cấp.',
+  },
+  {
+    id: 8,
+    category: 'Sử dụng chatbot',
+    question: 'Tôi nên đặt câu hỏi cho Mai Anh như thế nào?',
+    answer: 'Viết câu hỏi cụ thể, chẳng hạn ngành học, phương thức xét tuyển hoặc mốc thời gian bạn quan tâm. Bạn có thể gửi từng câu hỏi một và chọn gợi ý trả lời nếu Mai Anh đưa ra lựa chọn làm rõ.',
+  },
+  {
+    id: 9,
+    category: 'Phiên trò chuyện',
+    question: 'Làm thế nào để bắt đầu một phiên trò chuyện mới?',
+    answer: 'Nhấn Cuộc trò chuyện mới ở thanh bên. Nội dung đang hiển thị sẽ được làm mới để bạn bắt đầu chủ đề khác; mã khách truy cập vẫn được giữ để hệ thống nhận diện phiên truy cập hiện tại.',
+  },
+  {
+    id: 10,
+    category: 'Phiên trò chuyện',
+    question: 'Tôi có thể quay lại phiên trò chuyện cũ không?',
+    answer: 'Hiện tại thanh bên hiển thị các cuộc trò chuyện mẫu gần đây, còn nội dung phiên hiện tại chỉ được giữ trong lần mở ứng dụng này. Hãy ghi chú lại câu trả lời quan trọng trước khi tạo phiên mới hoặc tải lại trang.',
+  },
+  {
+    id: 11,
+    category: 'Dữ liệu & MUCE',
+    question: 'Thông tin của tôi được gửi tới MUCE như thế nào?',
+    answer: 'Khi bắt đầu tư vấn, hệ thống gửi vai trò, họ tên và email hoặc số điện thoại bạn nhập tới hệ thống MUCE để đăng ký thông tin hỗ trợ. Mỗi câu hỏi tiếp theo được gửi cùng mã khách truy cập của trình duyệt để liên kết với phiên tư vấn. Câu hỏi được truyền qua kết nối của ứng dụng tới endpoint MUCE và không được đặt trong URL.',
+  },
+  {
+    id: 12,
+    category: 'Dữ liệu & MUCE',
+    question: 'Mã khách truy cập được dùng để làm gì?',
+    answer: 'Mã này là một định danh kỹ thuật được tạo và lưu trong bộ nhớ trình duyệt, sau đó gửi kèm yêu cầu tới MUCE để nhận diện phiên tư vấn. Mã không thay thế cho họ tên hoặc thông tin liên hệ của bạn.',
   },
   {
     id: 2,
@@ -51,7 +81,7 @@ const articles: HelpArticle[] = [
   },
   {
     id: 7,
-    category: 'Trợ lý MUCE',
+    category: 'Sử dụng chatbot',
     question: 'Tôi có thể hỏi Mai Anh những nội dung nào?',
     answer: 'Bạn có thể hỏi về ngành học, phương thức xét tuyển, hồ sơ, học phí, mốc thời gian và các bước đăng ký nhập học tại MUCE.',
   },
@@ -87,6 +117,18 @@ export function HelpCenter({ onBack }: { onBack: () => void }) {
       </div>
 
       <div className="help-content">
+        <section className="help-usage-guide" aria-labelledby="usage-guide-title">
+          <div className="help-guide-heading">
+            <span className="help-guide-icon help-guide-icon--coral"><MessageSquareText size={20} /></span>
+            <div><span className="help-label">Dùng hiệu quả hơn</span><h2 id="usage-guide-title">Hướng dẫn sử dụng chatbot</h2></div>
+          </div>
+          <div className="help-usage-items">
+            <div><Send size={16} /><span><strong>Hỏi rõ một việc</strong><small>Nêu ngành, phương thức hoặc mốc thời gian bạn muốn biết.</small></span></div>
+            <div><MessageSquareText size={16} /><span><strong>Tiếp tục trong cùng phiên</strong><small>Gửi câu hỏi tiếp theo để Mai Anh hiểu mạch tư vấn.</small></span></div>
+            <div><ShieldCheck size={16} /><span><strong>Kiểm tra thông tin quan trọng</strong><small>Đối chiếu thông báo chính thức của MUCE trước khi quyết định.</small></span></div>
+          </div>
+        </section>
+
         <section className="help-login-guide" aria-labelledby="login-guide-title">
           <div className="help-guide-heading">
             <span className="help-guide-icon"><KeyRound size={20} /></span>
@@ -97,6 +139,15 @@ export function HelpCenter({ onBack }: { onBack: () => void }) {
             <div><span>02</span><strong>Nhập thông tin</strong><p>Dùng email và mật khẩu đã đăng ký với UniGuide.</p></div>
             <div><span>03</span><strong>Khôi phục khi cần</strong><p>Chọn Quên mật khẩu nếu bạn không thể truy cập.</p></div>
           </div>
+        </section>
+
+        <section className="help-data-guide" aria-labelledby="data-guide-title">
+          <div className="help-guide-heading">
+            <span className="help-guide-icon"><ShieldCheck size={20} /></span>
+            <div><span className="help-label">Minh bạch dữ liệu</span><h2 id="data-guide-title">Thông tin được gửi tới MUCE</h2></div>
+          </div>
+          <p>Thông tin bạn nhập trong biểu mẫu hồ sơ gồm vai trò, họ tên và email hoặc số điện thoại sẽ được gửi trực tiếp tới hệ thống MUCE để hỗ trợ tư vấn. Các câu hỏi được gửi cùng mã khách truy cập được lưu trong trình duyệt để kết nối yêu cầu với phiên hiện tại.</p>
+          <div className="help-data-flow"><span>Bạn nhập thông tin</span><Send size={15} /><span>Ứng dụng UniGuide</span><Send size={15} /><span>Hệ thống MUCE</span></div>
         </section>
 
         <div className="help-section-heading">
