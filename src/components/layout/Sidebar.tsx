@@ -6,9 +6,11 @@ interface SidebarProps {
   isOpen: boolean
   onClose: () => void
   onNewConversation: () => void
+  onHelpCenter: () => void
+  onLogin: () => void
 }
 
-export function Sidebar({ isOpen, onClose, onNewConversation }: SidebarProps) {
+export function Sidebar({ isOpen, onClose, onNewConversation, onHelpCenter, onLogin }: SidebarProps) {
   return (
     <>
       <button className={`sidebar-backdrop ${isOpen ? 'is-visible' : ''}`} type="button" aria-label="Đóng menu" onClick={onClose} />
@@ -27,11 +29,11 @@ export function Sidebar({ isOpen, onClose, onNewConversation }: SidebarProps) {
           ))}
         </nav>
         <div className="sidebar-footer">
-          <button className="sidebar-link" type="button"><CircleHelp size={18} />Trung tâm hỗ trợ</button>
+          <button className="sidebar-link" type="button" onClick={onHelpCenter}><CircleHelp size={18} />Trung tâm hỗ trợ</button>
           <div className="account-box">
             <div className="avatar">K</div>
             <div><strong>Khách</strong><span>Chưa đăng nhập</span></div>
-            <button className="icon-button" type="button" title="Đăng nhập"><LogIn size={18} /></button>
+            <button className="icon-button" type="button" title="Đăng nhập" onClick={onLogin}><LogIn size={18} /></button>
           </div>
           <span className="app-version">v1.0.2</span>
         </div>

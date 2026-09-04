@@ -1,5 +1,6 @@
 import { useEffect, useRef, useState } from 'react'
 import { AuthModal } from './components/auth/AuthModal'
+import { HelpCenter } from './components/HelpCenter'
 import { ChatComposer } from './components/chat/ChatComposer'
 import { Conversation } from './components/chat/Conversation'
 import { ProfileGate } from './components/chat/ProfileGate'
@@ -16,6 +17,7 @@ import type { ChatMessage } from './types/chat'
 import './styles/app.css'
 
 type ProfileStatus = 'loading' | 'required' | 'ready'
+type AppView = 'chat' | 'help'
 
 function App() {
   const [messages, setMessages] = useState<ChatMessage[]>([])
@@ -25,6 +27,7 @@ function App() {
   const [profileIntro, setProfileIntro] = useState('')
   const [profileError, setProfileError] = useState('')
   const [isAuthOpen, setIsAuthOpen] = useState(false)
+  const [view, setView] = useState<AppView>('chat')
   const conversationVersion = useRef(0)
 
   useEffect(() => {
@@ -114,6 +117,11 @@ function App() {
     setIsSidebarOpen(false)
   }
 
+  const openHelpCenter = () => {
+    setView('help')
+    setIsSidebarOpen(false)
+  }
+
   const renderWorkspace = () => {
     if (profileStatus === 'loading') {
       return <div className="chat-loading"><i /><span>Đang kết nối với Mai Anh...</span></div>
@@ -133,12 +141,12 @@ function App() {
   return (
     <>
       <div className="app-shell">
-        <Sidebar isOpen={isSidebarOpen} onClose={() => setIsSidebarOpen(false)} onNewConversation={startNewConversation} />
+        <Sidebar isOpen={isSidebarOpen} onClose={() => setIsSidebarOpen(false)} onNewConversation={() => { setView('chat'); startNewConversation() }} onHelpCenter={openHelpCenter} onLogin={() => setIsAuthOpen(true)} />
         <main className="main-panel">
           <Header onOpenMenu={() => setIsSidebarOpen(true)} onLogin={() => setIsAuthOpen(true)} />
           <div className="chat-workspace">
-            <div className="chat-scroll-region" aria-live="polite">{renderWorkspace()}</div>
-            {profileStatus === 'ready' && <ChatComposer onSend={sendMessage} disabled={isReplying} />}
+            <div className="chat-scroll-region" aria-live="polite">{view === 'help' ? <HelpCenter onBack={() => setView('chat')} /> : renderWorkspace()}</div>
+            {view === 'chat' && profileStatus === 'ready' && <ChatComposer onSend={sendMessage} disabled={isReplying} />}
           </div>
         </main>
       </div>
