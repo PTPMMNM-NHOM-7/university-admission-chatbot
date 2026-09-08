@@ -35,7 +35,7 @@ export function Sidebar({ isOpen, onClose, onNewConversation, onHelpCenter, onLo
             <div><strong>Khách</strong><span>Chưa đăng nhập</span></div>
             <button className="icon-button" type="button" title="Đăng nhập" onClick={onLogin}><LogIn size={18} /></button>
           </div>
-          <span className="app-version">v1.0.2</span>
+          <span className="app-version">v1.0.3</span>
         </div>
       </aside>
     </>
