@@ -45,6 +45,9 @@ describe('MUCE Vercel proxy', () => {
 
     assert.equal(response.status, 200)
     assert.equal(upstreamRequest.url, 'https://muce.edu.vn/TroLyAo/Register')
+    assert.match(upstreamRequest.init.headers['User-Agent'], /^Mozilla\/5\.0/)
+    assert.equal(upstreamRequest.init.headers.Origin, 'https://muce.edu.vn')
+    assert.equal(upstreamRequest.init.headers.Referer, 'https://muce.edu.vn/')
     assert.equal(new TextDecoder().decode(upstreamRequest.init.body), body.toString())
   })
 

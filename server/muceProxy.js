@@ -1,5 +1,8 @@
 const MUCE_API_BASE_URL = 'https://muce.edu.vn/TroLyAo'
 const MAX_REQUEST_BODY_BYTES = 16 * 1024
+const BROWSER_USER_AGENT =
+  'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 ' +
+  '(KHTML, like Gecko) Chrome/140.0.0.0 Safari/537.36'
 
 const endpointMethods = new Map([
   ['Intro', 'GET'],
@@ -37,7 +40,14 @@ export async function proxyMuceRequest(request, endpoint) {
 
   const upstreamInit = {
     method: request.method,
-    headers: { Accept: 'application/json' },
+    headers: {
+      Accept: 'application/json, text/plain, */*',
+      'Accept-Language': 'vi-VN,vi;q=0.9,en;q=0.8',
+      Origin: 'https://muce.edu.vn',
+      Referer: 'https://muce.edu.vn/',
+      'User-Agent': BROWSER_USER_AGENT,
+      'X-Requested-With': 'XMLHttpRequest',
+    },
   }
 
   if (request.method === 'POST') {
