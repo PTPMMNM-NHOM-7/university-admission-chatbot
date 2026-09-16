@@ -50,12 +50,18 @@ Frontend sử dụng ba endpoint của trợ lý MUCE:
 - `POST /TroLyAo/Ask`: gửi câu hỏi và nhận phản hồi.
 
 Trong môi trường development, Vite chuyển tiếp `/api/muce/*` tới
-`https://muce.edu.vn/TroLyAo/*`. API MUCE không trả header CORS cho origin khác,
-vì vậy môi trường production cũng cần cấu hình reverse proxy cùng đường dẫn.
-Không nên gọi trực tiếp `https://muce.edu.vn/TroLyAo` từ browser.
+`https://muce.edu.vn/TroLyAo/*`. Khi deploy lên Vercel, các function trong
+`api/muce/` cung cấp cùng đường dẫn và chuyển tiếp request từ server.
+Frontend không gọi trực tiếp MUCE vì API không trả header CORS cho origin khác.
 
 Biến môi trường mặc định được mô tả trong `.env.example`:
 
 ```env
 VITE_MUCE_API_BASE_URL=/api/muce
 ```
+
+## Deploy Vercel
+
+Import repository vào Vercel, giữ Framework Preset là `Vite`, sau đó deploy.
+Project không cần Cloudflare, GitHub Actions secret hoặc environment variable bắt buộc.
+Vercel sẽ build frontend và deploy ba API function trong cùng project.
