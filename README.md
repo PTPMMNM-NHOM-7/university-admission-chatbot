@@ -60,6 +60,15 @@ Biến môi trường mặc định được mô tả trong `.env.example`:
 VITE_MUCE_API_BASE_URL=/api/muce
 ```
 
+## Đóng góp
+
+Đọc [CONTRIBUTING.md](./CONTRIBUTING.md) trước khi báo lỗi hoặc gửi Pull Request.
+Những người tham gia dự án được ghi nhận trong [CONTRIBUTORS.md](./CONTRIBUTORS.md).
+
+## Giấy phép
+
+Dự án được phát hành theo [MIT License](./LICENSE).
+
 ## Deploy Vercel
 
 Import repository vào Vercel, giữ Framework Preset là `Vite`, sau đó deploy.
